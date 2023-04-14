@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 150px;
+}
+
+.title {
+    margin-bottom: 60px;
+    font-family: 'Dancing Script', 'cursive';
+    font-size: 44px;
+}
+
+form {
+    border: 1px solid black;
+    text-align: center;
+    padding-bottom: 15px;
+    margin: 0 auto;
+    width: 600px;
+}
+
+.input {
+    margin-bottom: 20px;
+    height: 4vh;
+    width: 33vh;
+}
+
+.submit {
+    width: 33vh;
+    margin-bottom: 20px;
+}
+
+.bottom-img {
+    display: block;
+    margin: 0 auto;
+    margin-top: 200px;
+    width: 1200px;
+}

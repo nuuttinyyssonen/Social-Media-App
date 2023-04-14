@@ -1,0 +1,64 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #eceff1;
+    height: 100%;
+}
+
+.pic {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+    background-color: white;
+    width: 60%;
+    height: 100%;
+    
+}
+
+.prof-pic{
+    max-width: 20px;
+    max-height: 20px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputs {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.tag {
+    margin-left: 15px
+}
+
+.comment {
+    margin-bottom: 20px;
+}
+
+.comments-cont {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    height: 40vh;
+    max-height: 40vh;
+    display: block;
+    overflow-y: scroll;
+}

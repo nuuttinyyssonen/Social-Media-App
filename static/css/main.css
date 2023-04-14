@@ -1,0 +1,171 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #eceff1;
+    height: 100%;
+}
+
+.description {
+    margin-bottom: 10px;
+}
+
+#img-container{
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 100px;
+    max-width: 500px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-bottom: 30px;
+    background-color: white;
+}
+
+.pic {
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 400px;
+}
+
+.prof-pic{
+    max-width: 20px;
+    max-height: 20px;
+    margin-left: 10px;
+}
+
+.headline {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    text-align: center;
+    background-color: white;
+    padding-top: 15px;
+    position: relative;
+    gap: 10px;
+} 
+
+.username {
+    margin-left: 15px;
+}
+
+.description {
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+
+.buttons {
+    margin-left: 15px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.comment {
+    border: none;
+    height: 40px;
+    width: 100%;
+}
+
+.comment::placeholder {
+    position: relative;
+    left: 15px;
+}
+
+.bottom-box {
+    display: flex;
+    flex-direction: row;
+}
+
+.publish {
+    background-color: white;
+    border: none;
+    color: grey;
+    margin-right: 5px;
+}
+
+.fa-heart-o {
+    background-color: white;
+    border: none;
+    font-size: 20px;
+}
+
+.fa-comment-o {
+    background-color: white;
+    border: none;
+    position: relative;
+    bottom: 1px;
+    font-size: 20px;
+}
+
+.comment-container {
+    display: flex;
+    flex-direction: row;
+    margin-left: 15px;
+}
+
+.fa-heart-o {
+    text-decoration: none;
+    color: black;
+}
+
+.likes {
+    margin-left: 15px;
+    position: relative;
+    top: 10px;
+}
+
+.fa-comment-o {
+    margin-left: 15px;
+    margin-bottom: 2px;
+}
+
+.fa-paper-plane {
+    text-decoration: none;
+    color: black;
+}
+
+.upload {
+    display: none;
+    justify-content: center;
+    margin: 0 auto;
+    width: 600px;
+    margin-top: 150px;
+    background-color: white;
+    border-radius: 10px;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
+.upload-form {
+    display: block;
+    margin: 0 auto;
+}
+
+.upload-title {
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+
+.submit {
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.select-file {
+    border-radius: 5px;
+}
+
+.img-desc {
+    width: 100%;
+}
+
+.comment-overlflow {
+    max-height: 25vh;
+    overflow-y: scroll;
+}

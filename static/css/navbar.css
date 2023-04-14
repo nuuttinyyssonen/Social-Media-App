@@ -1,0 +1,75 @@
+.full-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    width: 100%;
+    top: 3%;
+    margin-top: -30px;
+    background-color: white;
+}
+
+.title {
+    font-family: 'Dancing Script', 'cursive';
+    text-decoration: none;
+    font-size: 32px;
+    color: black;
+    /* margin-top: 13px; */
+    margin-bottom: 30px;
+}
+
+.three-buttons {
+    display: flex;
+    flex-direction: column;
+    font-size: 25px;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+}
+
+.search-input {
+    border: none;
+}
+
+.searchField {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+/* .upload {
+    display: none;
+    justify-content: center;
+    margin-top: 150px;
+} */
+
+.left_side_navbar {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    max-width: 30%;
+    height: 100%;
+    background-color: white;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-right: 45px;
+    position: fixed;
+}
+
+.mainpageBtn {
+    display: flex;
+    justify-content: start;
+}
+
+#uploadBtn {
+    display: flex;
+    justify-content: start;
+}

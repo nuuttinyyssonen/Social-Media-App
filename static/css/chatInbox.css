@@ -1,0 +1,39 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #eceff1;
+    height: 100%;
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    background-color: white;
+    margin-top: 100px;
+    /* max-width: 700px; */
+}
+
+.persons {
+    flex-direction: column;
+    border-right: 1px solid grey;
+    height: 80vh;
+    padding-right: 25px;
+    padding-left: 15px;
+}
+
+.chat {
+    width: 700px;
+    height: 80vh;
+    margin-left: 20px;
+}
+
+.chat-persons {
+    text-decoration: none;
+    color: black;
+    font-size: 25px
+}
