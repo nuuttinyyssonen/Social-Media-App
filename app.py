@@ -92,7 +92,7 @@ def login():
             next_page = url_for('mainpage')
         return redirect(next_page)
     
-    return render_template('login.html', form=form)
+    return render_template('./auth/login.html', form=form)
 
 
 # Signup route to create users and store them in db
@@ -131,7 +131,7 @@ def signup():
         db.session.commit()
         return redirect(url_for('login'))
     
-    return render_template('signup.html', form=form)
+    return render_template('./auth/signup.html', form=form)
 
 # Logout route for user to logout their account off the session
 @app.route('/logout', methods=['GET', 'POST'])
@@ -161,7 +161,7 @@ def reset():
         mail.send(msg)
         flash('Message was semt successfully')
 
-    return render_template('reset.html', form=form)
+    return render_template('./auth/reset.html', form=form)
 
 # Route for password reset when link from email is clicked
 @app.route('/password_reset/<token>', methods=['GET', 'POST'])
@@ -185,7 +185,7 @@ def password_reset(token):
         else:
             return render_template('noUser.html')
     
-    return render_template('password_reset.html', form=form, token=token)
+    return render_template('./auth/password_reset.html', form=form, token=token)
 
 # Route for mainpage which contains most of applications features and links
 @app.route('/mainpage', methods=['GET', 'POST'])
@@ -272,7 +272,7 @@ def mainpage():
             return redirect(url_for('mainpage'))
         
 
-    return render_template('mainpage.html', image_list=image_list, post=post)
+    return render_template('./main/mainpage.html', image_list=image_list, post=post)
 
 @app.route('/explore', methods=['GET', 'POST'])
 def explore():
@@ -293,7 +293,7 @@ def explore():
     for id in random_images_list_ids:
         random_images.append(Img.query.filter_by(id=id).first())
     
-    return render_template('explore.html', random_images=random_images)
+    return render_template('./main/explore.html', random_images=random_images)
 
 @app.route('/comments/<int:id>', methods=['GET', 'POST'])
 def comments(id):
@@ -343,7 +343,7 @@ def privateProfile(id):
 
     images = Img.query.filter_by(parent_id=id).all()
     post_count = (len(images))
-    return render_template('profile.html', images=images, post_count=post_count, followers_count=followers_count, following_count=following_count, username=logged_in_user_username, logged_in_user_first_name=logged_in_user_first_name, logged_in_user_last_name=logged_in_user_last_name)
+    return render_template('./profiles/profile.html', images=images, post_count=post_count, followers_count=followers_count, following_count=following_count, username=logged_in_user_username, logged_in_user_first_name=logged_in_user_first_name, logged_in_user_last_name=logged_in_user_last_name)
 
 @app.route('/profile/<int:id>', methods=['GET', 'POST'])
 def singleProfiles(id):
@@ -394,12 +394,12 @@ def singleProfiles(id):
         rooms[room] = {'members': 0, 'messages': []}
         return redirect(url_for('chat'))
 
-    return render_template('singleprofile.html', images=images, profile=profile, post_count=post_count, id=id, follower_count=follower_count, following_count=following_count, following_boolean=following_boolean)
+    return render_template('./profiles/singleprofile.html', images=images, profile=profile, post_count=post_count, id=id, follower_count=follower_count, following_count=following_count, following_boolean=following_boolean)
 
 @app.route('/post/<int:id>', methods=['GET', 'POST'])
 def singlePost(id):
     image = Img.query.filter_by(parent_id=id).first()
-    return render_template('singlePost.html', image=image)
+    return render_template('./main/singlePost.html', image=image)
 
 
 @app.route('/chat/inbox', methods=['GET', 'POST'])
@@ -408,7 +408,7 @@ def chatInbox():
     user_id = user.id
     chats = ChatRooms.query.filter_by(parent_id=user_id).all()
     more_chats = ChatRooms.query.filter_by(parent_id2=user_id).all()
-    return render_template('chatInbox.html', chats=chats, more_chats=more_chats)
+    return render_template('./chat/chatInbox.html', chats=chats, more_chats=more_chats)
 
 @app.route('/chat/<id>', methods=['GET', 'POST'])
 def chatRoom(id):
@@ -426,7 +426,7 @@ def chatRoom(id):
     if room is None:
         return redirect(url_for('mainpage'))
     
-    return render_template('chat.html', chats=chats, more_chats=more_chats, chat_history=chat_history, email=email)
+    return render_template('./chat/chat.html', chats=chats, more_chats=more_chats, chat_history=chat_history, email=email)
 
 @app.route('/chat', methods=['GET', 'POST'])
 def chat():
@@ -436,7 +436,7 @@ def chat():
     if room is None or email is None:
         return redirect(url_for('mainpage'))
     
-    return render_template('chat.html')
+    return render_template('./chat/chat.html')
 
 @socketio.on('message')
 def message(data):
