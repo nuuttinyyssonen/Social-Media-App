@@ -1,0 +1,23 @@
+{% block left_side_navbar %}
+<div class="left_side_navbar">
+    <a href="{{ url_for('mainpage') }}" class="title">Photogram</a>
+    <div class="three-buttons">
+        <form action="/mainpage" method="post">
+            <button class="fa fa-home"> Home</button>
+        </form>
+        <form action="/mainpage" method="post">
+            <button name="explore"><i class="bi bi-compass"> Explore</i></button>
+        </form>
+        <button id="uploadBtn" name="upload"><span class="bi-upload"> Create</span></button>
+        <form action="/chat/inbox" method="post">
+            <button class="fa fa-paper-plane"> Direct</button>
+        </form>
+        <form action="/mainpage" method="post" class="rightBar">
+            <button name="profile"><i class="bi-person-fill"> Profile</i></button>
+        </form>
+        <form action="/logout" method="post">
+            <button class="logout" name="logout"><i class="bi-box-arrow-right"> Logout</i></button>
+        </form>
+    </div>
+</div>
+{% endblock %}

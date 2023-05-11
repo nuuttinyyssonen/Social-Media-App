@@ -17,3 +17,10 @@ class UserQueries():
     @classmethod
     def exists_by_username(cls, username):
         return db.session.query(db.session.query(User).filter_by(username=username).exists()).scalar()
+
+
+class FollowingQueries():
+
+    @classmethod
+    def get_by_id(cls, id):
+        return Following.query.filter_by(id=id).first()
