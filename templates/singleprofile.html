@@ -50,7 +50,10 @@
             </div>
             <div class="description-view">
                 <form action="/profile/{{ id }}" method="post" class="top-profile">
-                    <h1>{{ profile.username }}</h1><span><button name="follow" id="edit">Follow</button></span>
+                    {% if following_boolean == True %}
+                        <h1>{{ profile.username }}</h1><span><button name="follow" id="edit">Follow</button></span>
+                    {% endif %}
+                    <!-- <h1>{{ profile.username }}</h1><span><button name="follow" id="edit">Following</button></span> -->
                     <button class="message" name="message">Send Message</button>
                 </form>
                 <div class="mid-profile">

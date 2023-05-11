@@ -36,6 +36,8 @@ mail = Mail(app)
 socketio = SocketIO(app)
 s = URLSafeTimedSerializer('ThisIsSecret')
 
+from queries import *
+
 @app.before_first_request
 def create_tables():
     db.create_all()
@@ -57,23 +59,35 @@ def generate_unique_code(length):
     
     return code
 
+# Login route to querie specific user
 @app.route('/', methods=['GET', 'POST'])
 def login():
     form = Login()
-
+    # Execute only if form has data to submit
     if form.validate_on_submit():
+        email = form.email.data
+        password = form.password.data
         global user
-        user = User.query.filter_by(email=form.email.data).first()
-        global user_id
-        user_id = user.id
+        user = UserQueries.get_by_email(email)
         session['email'] = request.form.get('email')
+        exists_email = UserQueries.exists_by_email(email)
 
-        if user is None or not user.check_password(form.password.data):
+        # Edge cases if user does not pass correct email or password
+        if exists_email != True:
+            flash('Invalid Email')
+            return redirect(url_for('login'))
+
+        # Another one
+        if user is None or not user.check_password(password):
             flash('Invalid Password or Email')
             return redirect(url_for('login'))
+        
+        global user_id
+        user_id = user.id
         login_user(user)
         next_page = request.args.get('next')
 
+        # Redirecting user to nextpage
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('mainpage')
         return redirect(next_page)
@@ -81,28 +95,36 @@ def login():
     return render_template('login.html', form=form)
 
 
+# Signup route to create users and store them in db
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = Signup()
 
+    # Execute code only if form has data
     if form.validate_on_submit():
-        exists_username = db.session.query(db.session.query(User).filter_by(username=form.username.data).exists()).scalar()
-        exists_email = db.session.query(db.session.query(User).filter_by(email=form.email.data).exists()).scalar()
+        password = form.password.data
+        username = form.username.data
+        email = form.email.data
 
+        exists_username = UserQueries.exists_by_username(username)
+        exists_email = UserQueries.exists_by_email(email)
+
+        # Checking if user already exists in db with username or email
         if exists_username:
-            flash('This username is already in use!')
+            print('This username is already in use!')
             return redirect(url_for('signup'))
         
         if exists_email:
-            flash('This email is already in use!')
+            print('This email is already in use!')
             return redirect('signup')
 
-        newUser = User(username=form.username.data, email=form.email.data, first_name=form.first_name.data, last_name=form.last_name.data)
-        newUser.set_password(form.password.data)
+        newUser = User(username=username, email=email, first_name=form.first_name.data, last_name=form.last_name.data)
+        newUser.set_password(password)
 
         following = Following(user=newUser, following_count=0, following="")
         followers = Followers(user=newUser, followers_count=0, followers="")
 
+        # adding users to db
         db.session.add(newUser, following)
         db.session.commit()
         db.session.add(followers)
@@ -111,19 +133,24 @@ def signup():
     
     return render_template('signup.html', form=form)
 
+# Logout route for user to logout their account off the session
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():
     logoutBtn = request.form.get('logout', False)
+    # Execute when logoutBtn is clicked
     if logoutBtn != False:
         logout_user()
     return redirect(url_for('login'))
 
+# reset route for user to be able to reset password via email
 @app.route('/reset', methods=['GET', 'POST'])
 def reset():
     form = Reset()
+
+    # Execute code only if form has data
     if form.validate_on_submit():
-        print("validates")
+
         global emailValue
         emailValue = form.email.data
         session['temporaryEmail'] = form.email.data
@@ -133,20 +160,24 @@ def reset():
         msg.body = 'Your link is {}'.format(link)
         mail.send(msg)
         flash('Message was semt successfully')
-        print('Message was semt successfully')
+
     return render_template('reset.html', form=form)
 
+# Route for password reset when link from email is clicked
 @app.route('/password_reset/<token>', methods=['GET', 'POST'])
 def password_reset(token):
+    # Try block to see if the token we are using is still valid meaning has the time expired yet
     try:
         s.loads(token, salt='password-reset', max_age=3600)
     except SignatureExpired:
         return render_template('signatureExpired.html')
     
     form = PasswordReset()
+    # Execute code only if form has data
     if form.validate_on_submit():
-        user = User.query.filter_by(email=session['temporaryEmail'] ).first()
+        user = UserQueries.get_by_email(session['temporaryEmail'])
         if user:
+            # if current User is valid then generate new password to it and update the specific db record
             new_password = generate_password_hash(form.password.data)
             User.query.filter_by(email=session['email']).update(dict(password=new_password))
             db.session.commit()
@@ -156,8 +187,10 @@ def password_reset(token):
     
     return render_template('password_reset.html', form=form, token=token)
 
+# Route for mainpage which contains most of applications features and links
 @app.route('/mainpage', methods=['GET', 'POST'])
 def mainpage():
+    # All the necessary inputs and buttons are below
     upload = request.form.get('submit', False)
     profile = request.form.get('profile', False)
     commentBtn = request.form.get('commentBtn', False)
@@ -175,13 +208,14 @@ def mainpage():
     comments_list = []
     post = ""
 
-    logged_in_user = User.query.filter_by(email=session['email']).first()
+    logged_in_user = UserQueries.get_by_email(session['email'])
     logged_in_user_id = logged_in_user.id
     logged_in_user_username = logged_in_user.username
 
     users_following = Following.query.filter_by(parent_id=logged_in_user_id).first()
     following_list = users_following.following.split(" ")
 
+    # Looping thourgh all the ids in users following list to be able to display other users posts in logged in user's mainpage
     for id in following_list:
         if len(id) > 0:
             images = Img.query.filter_by(parent_id=id).all()
@@ -324,8 +358,15 @@ def singleProfiles(id):
     following_count = following.following_count
     post_count = len(images)
 
+    following_boolean = False
+
     followBtn = request.form.get('follow', False)
     messageBtn = request.form.get('message', False)
+
+    print(follower.followers)
+
+    if str(sessionUser_id) in follower.followers:
+        following_boolean = True
 
     if followBtn != False:
 
@@ -352,7 +393,7 @@ def singleProfiles(id):
         rooms[room] = {'members': 0, 'messages': []}
         return redirect(url_for('chat'))
 
-    return render_template('singleprofile.html', images=images, profile=profile, post_count=post_count, id=id, follower_count=follower_count, following_count=following_count)
+    return render_template('singleprofile.html', images=images, profile=profile, post_count=post_count, id=id, follower_count=follower_count, following_count=following_count, following_boolean=following_boolean)
 
 @app.route('/post/<int:id>', methods=['GET', 'POST'])
 def singlePost(id):
