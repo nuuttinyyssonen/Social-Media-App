@@ -27,7 +27,7 @@
             {% for image in image_list %}
             <div id="img-container" class="img-container">
                 <div class="headline">
-                    <img class="prof-pic" src="{{ url_for('static', filename='profilepic.webp') }}"/>
+                    <img class="prof-pic" src="../static/Img/profilepic.webp"/>
                     <p>{{ image.author }}</p>
                 </div>
                 <img class="pic" src="data:image/jpeg;charset=utf-8;base64,{{ image.img | b64encode }}">
