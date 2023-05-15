@@ -1,4 +1,4 @@
-{% include "header.html" %}
+{% include "./add-ons/header.html" %}
     {% block header %}
     {% endblock %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}"/>
@@ -6,17 +6,17 @@
     <title>Document</title>
 </head>
 <body>
-    {% include "navbar.html" %}
+    {% include "./add-ons/navbar.html" %}
     {% block navbar %}
     {% endblock %}
 <div class="full-container">
-    {% include "left_side_navbar.html" %}
+    {% include "./add-ons/left_side_navbar.html" %}
     {% block left_side_navbar %}
     {% endblock %}
     <div class="container">
         <div class="profile-view">
             <div class="image-view">
-                <img class="profile-pic" src="{{ url_for('static', filename='profilepic.webp') }}" />
+                <img class="profile-pic" src="../static/Img/profilepic.webp" />
             </div>
             <div class="description-view">
                 <div class="top-profile">
@@ -49,6 +49,6 @@
         </div>
     </div>
 </div>
-    <script src="{{url_for('static', filename='profile.js')}}"></script>
+    <script src="../static/Js/profile.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-{% include "header.html" %}
+{% include "./add-ons/header.html" %}
     {% block header %}
     {% endblock %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}"/>
@@ -7,11 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    {% include "navbar.html" %}
+    {% include "./add-ons/navbar.html" %}
     {% block navbar %}
     {% endblock %}
 <div class="full-container">
-    {% include "left_side_navbar.html" %}
+    {% include "./add-ons/left_side_navbar.html" %}
     {% block left_side_navbar %}
     {% endblock %}
     <div class="chat-container">
@@ -43,6 +43,6 @@
         </div>
     </div>
 </div>
-    <script src="{{url_for('static', filename='chat.js')}}"></script>
+    <script src="../static/Js/chat.js"></script>
 </body>
 </html>

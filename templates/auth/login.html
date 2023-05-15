@@ -1,4 +1,4 @@
-{% include "header.html" %}
+{% include "./add-ons/header.html" %}
     {% block header %}
     {% endblock %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}"/>
@@ -6,7 +6,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- <img class="pic" src="{{ url_for('static', filename='Ig.png') }}" /> -->
         <img class="pic" src="https://raw.githubusercontent.com/bzapata95/instagram-clone/master/web/public/img/mobilegif.gif"/>
         <div class="form"></div>
             <form action="/" method="post">
@@ -19,10 +18,10 @@
                 {{ form.submit(class="submit btn btn-primary") }}
                 <hr>
                 <a href="/reset">Forgot Your Password?</a>
-                <p class="linkToSignUp">Not a Member Yet? Sign up <a href="{{ url_for('signup') }}">Here</a></p>
+                <p class="linkToSignUp">Not a Member Yet? Sign up <a href="/signup">Here</a></p>
             </form>
         </div>
-        <img class="bottom-img" src="{{ url_for('static', filename='ig_bottom.png') }}"/>
+        <img class="bottom-img" src="../static/Img/ig_bottom.png"/>
     </div>
     
 </body>

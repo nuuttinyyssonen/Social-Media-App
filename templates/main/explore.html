@@ -1,4 +1,4 @@
-{% include "header.html" %}
+{% include "./add-ons/header.html" %}
     {% block header %}
     {% endblock %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/explore.css') }}"/>
@@ -6,11 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    {% include "navbar.html" %}
+    {% include "./add-ons/navbar.html" %}
     {% block navbar %}
     {% endblock %}
 <div class="full-container">
-    {% include "left_side_navbar.html" %}
+    {% include "./add-ons/left_side_navbar.html" %}
     {% block left_side_navbar %}
     {% endblock %}
     <div class="img-container">

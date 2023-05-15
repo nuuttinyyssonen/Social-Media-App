@@ -23,11 +23,13 @@ const createMessage = (msg) => {
     console.log(content)
     messageArea.append(paragraph)
     messageArea.append(linebreak)
+    console.log("working1")
 }
 
 socket.on('message', function(data) {
     createMessage(data.message)
     console.log(data.message)
+    console.log("working2")
 })
 
 const sendMessage = () => {
@@ -35,7 +37,9 @@ const sendMessage = () => {
         return; 
     }
     socket.emit('message', {data: messageValue.value})
+    console.log(messageValue.value)
     messageValue.value = ""
+    console.log("working3")
 }
 
 sendBtn.addEventListener('click', sendMessage)
@@ -44,7 +48,7 @@ const leaveRoom = () => {
     socket.on('disconnect', function() {
         socket.disconnect()
     })
-    window.location.href = "{{ url_for('mainpage') }}"
+    window.location.href = "/mainpage"
 }
 
 leaveBtn.addEventListener('click', leaveRoom)
