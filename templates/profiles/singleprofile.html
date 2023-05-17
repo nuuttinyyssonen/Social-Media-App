@@ -36,7 +36,7 @@
         </div>
         <div class="img-container">
             {% for image in images %}
-                <img class="pic" src="data:image/jpeg;charset=utf-8;base64,{{ image.img | b64encode }}">
+                <a href="/post/{{ image.id }}"><img class="pic" src="data:image/jpeg;charset=utf-8;base64,{{ image.img | b64encode }}"></a>
             {% endfor %}
         </div>
     </div>

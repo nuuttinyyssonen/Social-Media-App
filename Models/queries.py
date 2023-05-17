@@ -45,6 +45,10 @@ class ImgQueries():
         return Img.query.filter_by(parent_id=id).first()
 
     @classmethod
+    def get_by_own_id(cls, id):
+        return Img.query.filter_by(id=id).first()
+
+    @classmethod
     def get_all_by_id(cls, id):
         return Img.query.filter_by(parent_id=id).all()
     

@@ -1,0 +1,41 @@
+{% include "./add-ons/header.html" %}
+    {% block header %}
+    {% endblock %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/post.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}"/>
+    <title>Document</title>
+</head>
+<body>
+    {% include "./add-ons/navbar.html" %}
+    {% block navbar %}
+    {% endblock %}
+    <div class="full-container">
+        {% include "./add-ons/left_side_navbar.html" %}
+        {% block left_side_navbar %}
+        {% endblock %}
+        <div class="container">
+            <img class="main-pic" src="data:image/jpeg;charset=utf-8;base64,{{ img.img | b64encode }}">    
+            <div class="right-side-cont">
+                <div class="post-user-bar">
+                    <img class="user-profile-pic" src="{{ url_for('static', filename='Img/profilepic.webp') }}">
+                    <p>{{ img.author }}</p>
+                </div>
+                <p class="image-description">{{ img.description }}</p>
+                <div class="comments-section">
+                    {% for comment in img_comments %}
+                        <div class="post-user-bar">
+                            <img class="user-profile-pic" src="{{ url_for('static', filename='Img/profilepic.webp') }}">
+                            <p>{{ comment.username }}</p>
+                        </div>
+                        <p class="user-comment">{{ comment.comments }}</p>
+                    {% endfor %}
+                </div>
+                <form action="/post/{{ id }}" class="input-section" method="post">
+                    <input name="commentValue" class="comment-input" placeholder="Add comment..."/>
+                    <button name="submit" type="submit" class="comment-input-btn">Publish</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

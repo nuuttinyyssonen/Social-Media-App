@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #eceff1;
+}
+
+.main-pic {
+    max-width: 800px;
+    max-height: 1000px;
+    height: auto;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    padding-top: 150px;
+    max-height: 750px;
+}
+
+.container .comments-section {
+    overflow-y: scroll;
+    max-height: 78%;
+}
+
+.right-side-cont {
+    background-color: white;
+    padding: 10px 20px 10px 20px;
+    width: 300px;
+}
+
+.user-profile-pic {
+    max-width: 25px;
+    max-height: 25px;
+}
+
+.post-user-bar {
+    display: flex;
+    gap: 15px;
+}
+
+.image-description {
+    border-bottom: 1px solid black;
+    padding-bottom: 5px;
+}
+
+.user-comment {
+    padding-bottom: 20px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.input-section {
+    display: flex;
+    border-top: 1px solid black;
+    padding-top: 10px;
+}
+
+.comment-input {
+    border: none;
+}

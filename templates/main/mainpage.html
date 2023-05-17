@@ -35,13 +35,14 @@
                     <form action="/comments/{{image.id}}">
                         <button id="like" name="like" class="fa fa-heart-o"></button>
                     </form>
-                    <form action="/comments/{{ image.id }}" method="post">
+                    <form action="/post/{{ image.id }}" method="post">
                         <button name="commentButton" class="fa fa-comment-o"></button>
                     </form>
                 </div>
                 <p class="likes">{{image.likes}} Likes</p>
                 <p class="username"><strong>{{ image.author }}</strong></p>
                 <p class="description">{{ image.description }}</p>
+                <p><a class="link-to-comments" href="/post/{{ image.id }}">See all comments</a></p>
                 <div class="comment-overlflow">
                     {% for comment in image.comments_child %}
                         <div class="comment-container">

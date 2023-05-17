@@ -14,6 +14,7 @@ from .routes.chat.chatRoom import chatRoom_bp
 from .routes.main.explore import explore_bp, b64encode
 from .routes.auth.reset import reset_bp, password_reset_bp
 from .routes.auth.logout import logout_bp
+from .routes.posts.singlePost import singlePost_bp
 from decouple import config
 
 app = Flask(__name__)
@@ -85,3 +86,4 @@ app.register_blueprint(explore_bp)
 app.register_blueprint(reset_bp)
 app.register_blueprint(password_reset_bp)
 app.register_blueprint(logout_bp)
+app.register_blueprint(singlePost_bp)
