@@ -18,7 +18,10 @@ def singleProfiles(id):
     following = FollowingQueries.get_by_id(sessionUser_id)
 
     follower_count = follower.followers_count
-    following_count = following.following_count
+    if following is not None:
+        following_count = following.following_count
+    else:
+        following_count = 0
     post_count = len(images)
 
     following_boolean = False

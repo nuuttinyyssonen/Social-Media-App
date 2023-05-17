@@ -36,7 +36,8 @@ def mainpage():
 
     # users_following = Following.query.filter_by(parent_id=logged_in_user_id).first()
     users_following = FollowingQueries.get_by_id(logged_in_user_id)
-    following_list = users_following.following.split(" ")
+    if users_following is not None:
+        following_list = users_following.following.split(" ")
 
     # Looping thourgh all the ids in users following list to be able to display other users posts in logged in user's mainpage
     for id in following_list:

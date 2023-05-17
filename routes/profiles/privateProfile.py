@@ -20,7 +20,10 @@ def privateProfile(id):
     followers_count = followers.followers_count
 
     following = FollowingQueries.get_by_id(logged_in_user_id)
-    following_count = following.following_count
+    if following is not None:
+        following_count = following.following_count
+    else:
+        following_count = 0
 
     images = ImgQueries.get_all_by_id(id)
     post_count = (len(images))

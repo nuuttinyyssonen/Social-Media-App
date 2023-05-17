@@ -1,7 +1,7 @@
 let messageValue = document.getElementById('messageValue');
 let sendBtn = document.getElementById('send');
 let leaveBtn = document.getElementById('leave');
-let messageArea = document.getElementById('message');
+let messageArea = document.getElementById('own-texts');
 let title = document.getElementById('title');
 
 let socket = io()
