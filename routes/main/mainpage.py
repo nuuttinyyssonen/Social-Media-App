@@ -46,10 +46,11 @@ def mainpage():
             singleImage = ImgQueries.get_by_id(id)
             image_list.append(images)
 
-            singleImage_id = singleImage.id
-            comments = CommentsQueries.get_all_by_id(singleImage_id)
-            comments_list.append(comments)
-            post = zip(image_list, comments_list)
+            if singleImage is not None:
+                singleImage_id = singleImage.id
+                comments = CommentsQueries.get_all_by_id(singleImage_id)
+                comments_list.append(comments)
+                post = zip(image_list, comments_list)
 
     # Comments functionality. Adding comment record to db if button is clicked
     if commentBtn != False:

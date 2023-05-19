@@ -68,4 +68,5 @@ class ChatHistory(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     parent_id = db.Column(db.Integer, db.ForeignKey('chatrooms.id'))
     messages = db.Column(db.String)
+    message_time = db.Column(db.String)
     person = db.Column(db.String)

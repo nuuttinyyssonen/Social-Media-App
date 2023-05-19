@@ -15,18 +15,34 @@
     {% endblock %}
     <div class="chat-container">
         <div class="persons">
+            <div class="chat-header">
+                <div class="titles">
+                    <h2 class="chat-header-title">Direct</h2>
+                </div>
+                <button>
+                    <i class="bi bi-envelope"></i>
+                </button>
+            </div>
+            <div class="chat-rooms">
             {% for chat in chats %}
+                <img class="chat-profile-pic" src="../static/Img/profilepic.webp"/>
                 <a class="chat-persons" href="/chat/{{ chat.room_code }}">{{ chat.user2 }}</a>
                 <br>
             {% endfor %}
             {% for chat in more_chats %}
+                <img class="chat-profile-pic" src="../static/Img/profilepic.webp"/>
                 <a class="chat-persons" href="/chat/{{ chat.room_code }}">{{ chat.user1 }}</a>
                 <br>
             {% endfor %}
+            </div>
         </div>
         <div class="chat">
-            <h1>Chat area</h1>
-
+            <p class="chat-logo">
+                <i class="fa fa-paper-plane"></i>
+            </p>
+            <h1 class="chatInbox-title">Your Messages</h1>
+            <p class="chatInbox-infor">Send private messages to a friend</p>
+            <button class="send-message-btn">Send Message</button>
         </div>
     </div>
 </div>

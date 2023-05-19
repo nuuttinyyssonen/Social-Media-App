@@ -1,11 +1,13 @@
 from flask import Blueprint, session, render_template, redirect, url_for
 from ...Models.queries import *
 
+
 chatRoom_bp = Blueprint('chatRoom_bp', __name__)
 
 # This route is to specific chat room
 @chatRoom_bp.route('/chat/<id>', methods=['GET', 'POST'])
 def chatRoom(id):
+    
     user = UserQueries.get_by_email(session['email'])
     user_id = user.id
     chats = ChatRooms.query.filter_by(parent_id=user_id).all()

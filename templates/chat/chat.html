@@ -16,36 +16,46 @@
     {% endblock %}
     <div class="chat-container">
         <div class="persons">
+            <div class="chat-header">
+                <div class="titles">
+                    <h2 class="chat-header-title">Direct</h2>
+                </div>
+                <button>
+                    <i class="bi bi-envelope"></i>
+                </button>
+            </div>
+            <div class="chat-rooms">
             {% for chat in chats %}
+                <img class="chat-profile-pic" src="../static/Img/profilepic.webp"/>
                 <a class="chat-persons" href="/chat/{{ chat.room_code }}">{{ chat.user2 }}</a>
                 <br>
             {% endfor %}
             {% for chat in more_chats %}
+                <img class="chat-profile-pic" src="../static/Img/profilepic.webp"/>
                 <a class="chat-persons" href="/chat/{{ chat.room_code }}">{{ chat.user1 }}</a>
                 <br>
             {% endfor %}
+            </div>
         </div>
         <div class="chat">
             <div class="all-messages">
-                <h1 id="title">Chat area</h1>
-                <div class="header">
-                    <button id="leave">Leave</button>
-                </div>
                 <div id="message">
                     {% for message in chat_history %}
                         {% if message.person == email %}
                         <div class="own-texts">
+                            <p class="date">{{ message.message_time }}</p>
                             <p class="text">{{ message.messages }}</p>
                         </div>
                         {% endif %}
                         {% if message.person != email %}
+                            <p class="date-other">{{ message.message_time }}</p>
                             <p class="text-other">{{ message.messages }}</p>
                         {% endif %}
                         <br>
                     {% endfor %}
                     <div class="own-texts" id="own-texts">
 
-                    </div>
+                </div>
             </div>
         </div>
             <div class="input-area">

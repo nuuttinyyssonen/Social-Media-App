@@ -16,6 +16,7 @@ from .routes.auth.reset import reset_bp, password_reset_bp
 from .routes.auth.logout import logout_bp
 from .routes.posts.singlePost import singlePost_bp
 from decouple import config
+import datetime
 
 app = Flask(__name__)
 socketio = SocketIO(app)
@@ -54,8 +55,9 @@ def message(data):
     content = {
         "message": data['data']
     }
-
-    history = ChatHistory(messages=data['data'], parent_id=room_id, person=email)
+    message = datetime.datetime.now()
+    message_time = str(message.hour) + ":" + str(message.minute)
+    history = ChatHistory(messages=data['data'], parent_id=room_id, person=email, message_time=message_time)
     db.session.add(history)
     db.session.commit()
     send(content, to=room)
